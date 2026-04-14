@@ -1,4 +1,4 @@
-# Grasp in Gaussians (GraG): Fast Monocular Reconstruction of Dynamic Hand–Object Interactions
+## Grasp in Gaussians (GraG): Fast Monocular Reconstruction of Dynamic Hand–Object Interactions
 
 Official implementation of Grasp in Gaussians.
 
@@ -9,6 +9,6 @@ Please see more interactive examples at the [Project Page](https://aidilayce.git
 
 ![teaser](assets/teaser.png)
 
-## Demo:
+### Demo:
 
 ![demo](assets/intro_github.gif)
