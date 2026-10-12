@@ -1,0 +1,38 @@
+# Exact versions / commits used in development (handmesh env, Python 3.12, CUDA 12.1).
+# Core torch stack (from https://download.pytorch.org/whl/cu121):
+torch==2.4.1+cu121
+torchvision==0.19.1+cu121
+torchaudio==2.4.1+cu121
+
+# Pip wheels:
+numpy==1.26.4
+scipy==1.17.1
+scikit-learn==1.7.1
+scikit-image==0.25.2
+trimesh==4.11.3
+pyrender==0.1.45
+opencv-python==4.11.0.86
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+matplotlib==3.10.3
+pyyaml==6.0.2
+yacs==0.1.8
+webdataset==1.0.2
+ultralytics==8.1.34
+dill==0.4.1
+easydict==1.13
+einops==0.8.1
+kornia==0.8.1
+transformers==4.57.1
+wandb==0.22.2
+google-genai==1.65.0
+smplx==0.1.28
+warp-lang==1.8.1
+spconv-cu121==2.3.7
+
+# Built from source against the local CUDA 12.1 toolchain:
+pytorch3d==0.7.8
+gsplat @ git+https://github.com/nerfstudio-project/gsplat.git@0b4dddf04cb687367602c01196913cde6a743d70
+nvdiffrast @ git+https://github.com/NVlabs/nvdiffrast@729261dc64c4241ea36efda84fbf532cc8b425b8
+chumpy @ git+https://github.com/zerchen/chumpy@15479f8c930a39e1a7c6064458ec78c81b36834c
+# torchsparse: built from source (github.com/mit-han-lab/torchsparse) — used by SAM3D-Objects

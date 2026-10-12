@@ -1,0 +1,102 @@
+[project]
+name = "grag"
+version = "0.1.0"
+description = "GraG: Grasp in Gaussians — monocular hand-object reconstruction"
+requires-python = "==3.12.*"
+
+# Pip-resolvable runtime dependencies. The CUDA extensions that must be built
+# from source (pytorch3d, gsplat, nvdiffrast, chumpy, torchsparse) are installed
+# in a second step — see INSTALL.md.
+dependencies = [
+    "torch==2.4.1",
+    "torchvision==0.19.1",
+    "torchaudio==2.4.1",
+    "numpy==1.26.4",
+    "scipy",
+    "scikit-learn",
+    "scikit-image",
+    "trimesh",
+    "pyrender==0.1.45",
+    "opencv-python==4.11.0.86",
+    "imageio",
+    "imageio-ffmpeg",
+    "matplotlib",
+    "pillow",
+    "pyyaml",
+    "yacs",
+    "webdataset==1.0.2",
+    "ultralytics==8.1.34",
+    "dill==0.4.1",
+    "easydict",
+    "einops",
+    "kornia",
+    "tqdm",
+    "transformers",
+    "wandb",
+    "google-genai",
+    "smplx",
+    "warp-lang==1.8.1",
+    "spconv-cu121==2.3.7",
+    # required by the vendored SAM3DO import chain (grag_common.optimization_utils
+    # -> sam3d_objects); kaolin + utils3d are needed too but are not plain PyPI
+    # installs — see INSTALL.md.
+    "plyfile",
+    "optree",
+    "astor",
+    "seaborn",
+    # SAM 3, GLM object naming, MV-SAM3D, DA3 and Dyn-HaMR runtime dependencies.
+    "decord",
+    "pycocotools",
+    "ftfy",
+    "accelerate",
+    "tensorboard",
+    "lightning",
+    "xatlas",
+    "pyvista",
+    "pymeshfix",
+    "igraph",
+    "varname",
+    "objprint",
+    "questionary",
+    "evo",
+    "kiui",
+    "pycolmap",
+]
+
+[project.optional-dependencies]
+# Evaluation extras (eval/). pytorch3d and chumpy are built from source
+# (see INSTALL.md); everything else here is pip-resolvable.
+#   - open3d / loguru: used by the vendored HOLD evaluator (ICP metric, logging)
+#
+# NOTE: HOT3D *clip extraction* (eval/hot3d/) needs `projectaria-tools`, which
+# depends on numpy>=2 and therefore CANNOT share this env (GraG pins numpy 1.26.4
+# for the pytorch3d / CUDA-extension ABI). It also needs the HOT3D repo's own
+# `data_loaders` / `dataset_api` modules, which are not on PyPI. Run clip
+# extraction in the HOT3D toolkit's own environment; see eval/README.md.
+eval = [
+    "tabulate",
+    "open3d",
+    "loguru",
+]
+
+# Configure the uv cache if the default home-directory cache is too small:
+#   export UV_CACHE_DIR=/path/with/free-space/uv_cache
+
+# torch 2.4.1 + CUDA 12.1 wheels come from PyTorch's own index.
+[tool.uv.sources]
+torch = { index = "pytorch-cu121" }
+torchvision = { index = "pytorch-cu121" }
+torchaudio = { index = "pytorch-cu121" }
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[tool.setuptools]
+# Stage packages (importable from the repo root).
+packages = ["grag_common", "preprocessing", "optimization", "eval"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

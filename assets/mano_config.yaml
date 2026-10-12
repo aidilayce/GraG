@@ -1,0 +1,6 @@
+MANO:
+  MODEL_PATH: third_party/Dyn_HaMR/_DATA/mano
+  GENDER: neutral
+  NUM_HAND_JOINTS: 15
+  MEAN_PARAMS: third_party/Dyn_HaMR/_DATA/data/mano_mean_params.npz
+  CREATE_BODY_POSE: FALSE
